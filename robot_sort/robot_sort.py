@@ -97,36 +97,53 @@ class SortingRobot:
         Sort the robot's list.
         """
 
-        # self.swap_item()
-        # self.set_light_off()
+        # selection sort is way faster.
+        # 1. start with the left most item
+        # 1.5 pick it up
+        # 2. keep comparing item to items on the right, if it approaches an item that is smaller, then switch. Keep comparing this item all the way through end of list
+        # 3. once you reach end, move all the way left, and place this item in the empty spot you have for it
+        # 4. move right one spot, and repeat the previous few steps (1.5, 2, 3 & 4)
+        # 5. once you cannot move right anymore and light is in certain state, then return
 
-        # while self.can_move_right() == True:
-        #     self.move_right()
-        #     if self.compare_item() == 1:
-        #         return
-
-        while True:
+        if self.can_move_right() == False and self.light_is_on() == True:
+            return
+        else:
+            self.swap_item()
+            self.set_light_on()
+            while self.can_move_right():
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    self.set_light_off()
+            while self.can_move_left() and self.compare_item() is not None:
+                self.move_left()
             self.swap_item()
             self.move_right()
+            return self.sort()
 
-            if self.compare_item() == 1:
-                self.swap_item()
-                self.move_left()
-                self.swap_item()
-                self.move_right()
-                self.set_light_on()
-            else:
-                self.move_left()
-                self.swap_item()
-                self.move_right()
+        # # naive solution - takes wayyyy too long. bubble sort
+        # while True:
+        #     self.swap_item()
+        #     self.move_right()
 
-            if self.can_move_right() == False:
-                if self.light_is_on() == False:
-                    break
-                else:
-                    while self.can_move_left():
-                        self.move_left()
-                    self.set_light_off()
+        #     if self.compare_item() == 1:
+        #         self.swap_item()
+        #         self.move_left()
+        #         self.swap_item()
+        #         self.move_right()
+        #         self.set_light_on()
+        #     else:
+        #         self.move_left()
+        #         self.swap_item()
+        #         self.move_right()
+
+        #     if self.can_move_right() == False:
+        #         if self.light_is_on() == False:
+        #             break
+        #         else:
+        #             while self.can_move_left():
+        #                 self.move_left()
+        #             self.set_light_off()
 
 
 if __name__ == "__main__":
