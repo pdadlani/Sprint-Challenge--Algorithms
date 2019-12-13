@@ -37,3 +37,5 @@ def whereEggBreaks(n):
     else:
       minFloor = midPoint
       test(minFloor, maxFloor)
+
+O(log(n)): because it is a binary search
