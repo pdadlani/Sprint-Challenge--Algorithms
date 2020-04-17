@@ -96,7 +96,32 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        pass
+        # Selection sort is an option, by looping through all values to select the smallest value in each iteration.
+        # Use the light to keep track of if the robot is still sorting
+
+        self.set_light_on()
+
+        while self.light_is_on():
+            self.set_light_off()
+            self.swap_item()
+
+            while self.can_move_right():
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    self.set_light_on()
+            
+            while self.compare_item() != None:
+                self.move_left()
+
+            self.swap_item()
+            self.move_right()
+
+        return
+
+            
+        
+
 
 
 if __name__ == "__main__":
